@@ -7,17 +7,22 @@ spec:
   selector:
     app: commonweb
   ports:
-  - name: 服务名-sv
+  - name: commonweb-svc
     port: 3000
     targetPort: 3000
     nodePort: 30001
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commonweb-deployment
+  name: commonweb
+  labels:
+    app: commonweb
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: commonweb
   template:
     metadata:
       labels:
@@ -25,6 +30,7 @@ spec:
     spec:
       containers:
       - name: commonweb
-        image: commonweb
+        image: a112121788/commonweb_pod:20210105091829
         ports:
         - containerPort: 3000
+        imagePullPolicy: IfNotPresent
