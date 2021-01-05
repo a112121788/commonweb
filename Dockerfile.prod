@@ -1,0 +1,9 @@
+FROM registry.cn-qingdao.aliyuncs.com/speedimages/ruby:2.7.1
+ENV RAILS_ENV=production
+
+WORKDIR /commonweb
+COPY . .
+RUN bundle install
+# RUN bundle exec rails webpacker:install
+EXPOSE 3000
+CMD ['rails', 's', '-b', '0.0.0.0', '-p', '3000']
